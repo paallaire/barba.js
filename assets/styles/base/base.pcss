@@ -1,0 +1,45 @@
+:root {
+  --scrollbar-width: 17px;
+}
+
+html {
+  @apply scroll-smooth text-base;
+}
+
+body {
+  @apply font-primary text-brown-500;
+}
+
+/* *:focus-visible {
+
+  &:not(input) {
+    @mixin buttonStateFocus;
+  }
+
+
+} */
+
+[x-cloak] { 
+  display: none !important; 
+}
+
+.skip-to-content {
+  @apply bg-turquoise-500 text-white p-4 fixed top-4 left-4 z-[999];
+  @apply transition duration-150 ease-linear translate-y-[-150%];
+
+  &:focus {
+    @apply translate-y-0;
+  }
+}
+
+
+
+/* temp */
+html {
+  margin-top: 0px !important;
+}
+
+#wpadminbar {
+
+  display: none;
+}

@@ -1,0 +1,49 @@
+.gravity-theme {
+
+  .gform_required_legend,
+  .gform_validation_errors {
+    @apply !hidden;
+  }
+
+  .gfield_label {
+    @apply !text-md !text-brown-800 !font-semibold;
+  }
+
+  .gfield {
+
+    textarea,
+    input {
+      @apply !p-2 !border-2 !border-brown-500 !text-md !text-brown-600 !font-normal !bg-transparent !outline-none;
+      @apply placeholder:!text-brown-600;
+      
+      &:focus,
+      &:focus-visible {
+        @apply !border-turquoise-500 !border-2 !outline-none;  
+      }
+
+    }
+
+  }
+
+  .gfield_error {
+
+    input {
+      @apply !border-red-error;
+    }
+
+  }
+  
+  .gfield_validation_message {
+    @apply !mt-1 !p-0 !bg-transparent !text-red-error !border-none !text-xs !font-normal;
+  }
+
+  img.gform_ajax_spinner {
+    @apply ml-4;
+  }
+
+  .gform_fileupload_rules {
+    @apply !pt-0 !text-[0.8125rem];
+  }
+
+}
+

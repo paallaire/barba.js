@@ -1,0 +1,21 @@
+@define-mixin stateDisabled {
+  & {
+    @apply opacity-50 pointer-events-none;
+  }
+}
+
+@define-mixin stateFocus {
+  & {
+		@apply focus:outline-none;
+    @apply ring-4 ring-orange-regular ring-offset-0;
+  }
+}
+
+@define-mixin buttonStateFocus {
+  & {
+		@apply focus:outline-none;
+    @apply ring-4 ring-orange-regular ring-offset-0;
+  }
+}
+
+
