@@ -1,28 +1,63 @@
-import '/assets/styles/main.pcss';
+import barba from "@barba/core";
+import gsap from "gsap";
 
-import Alpine from 'alpinejs';
-import focus from '@alpinejs/focus';
-import MemberCard from './alpine/MemberCard.js';
+import "/assets/styles/main.pcss";
 
-import imageSlider from '../scripts/components/sliders/images.js';
-import imageBeforeAfter from '../scripts/components/imageBeforeAfter.js';
-
-import jQueryInit from './jquery';
-
-window.Alpine = Alpine;
-
-Alpine.plugin(focus);
-Alpine.data('MemberCard', MemberCard);
-Alpine.start();
-
-document.documentElement.style.setProperty(
-  '--scrollbar-width',
-  window.innerWidth - document.documentElement.clientWidth + 'px'
-);
-jQueryInit();
-
-document.addEventListener('DOMContentLoaded', function () {
-  console.log('DOMContentLoaded');
-  imageSlider();
-  imageBeforeAfter();
+document.addEventListener("DOMContentLoaded", function () {
+  console.log("DOMContentLoaded");
 });
+
+const delay = (n) => {
+  n = n || 200;
+  return new Promise((done) => {
+    setTimeout(() => {
+      done();
+    }, n);
+  });
+};
+
+barba.init({
+  debug: true,
+  timeout: 20000,
+  sync: false,
+  transitions: [
+    {
+      name: "opacity-transition",
+      leave(data) {
+        data.current.container.style.position = "absolute";
+        data.current.container.style.top = 0;
+        data.current.container.style.left = 0;
+        data.current.container.style.width = "100%";
+
+        return gsap.to(data.current.container, {
+          opacity: 0,
+          duration: 0.3,
+        });
+      },
+      async enter(data) {
+        const done = this.async();
+        const dom = data.next.container;
+        const elHeroAbout = dom.querySelector("#heroAbout");
+
+        gsap.set(elHeroAbout, { opacity: 0, y: -100 });
+
+        gsap.from(data.next.container, {
+          opacity: 0,
+          duration: 0.3,
+          onComplete: () => {
+            gsap.fromTo(elHeroAbout, { opacity: 0, y: -100 }, { opacity: 0.8, y: 0, duration: 1, ease: "elastic" });
+            done();
+          },
+        });
+
+        // await delay(1500);
+      },
+    },
+  ],
+});
+
+// const done = this.async();
+
+// pageTransition();
+// await delay(1500);
+// done();
